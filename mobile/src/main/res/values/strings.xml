@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CRUD</string>
+    <string name="labelLogin">Login</string>
+    <string name="labelPassword">Password</string>
+    <string name="btnLogar">Logar</string>
+    <string name="title_activity_geral">GeralActivity</string>
+
+</resources>
