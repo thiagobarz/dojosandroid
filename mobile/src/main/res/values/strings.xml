@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">CRUD</string>
-    <string name="labelLogin">Login</string>
-    <string name="labelPassword">Password</string>
+    <string name="labelLogin">Usuário</string>
+    <string name="hintLogin">Digite o seu usuário</string>
+    <string name="labelPassword">Senha</string>
+    <string name="hintPassword">Digite a sua senha</string>
     <string name="btnLogar">Logar</string>
     <string name="title_activity_geral">GeralActivity</string>
+
+
+    <!-- TOAST -->
+    <string name="toastPreenchaUsuarioSenha">Preencha os campos Usuário e Senha.</string>
 
 </resources>
