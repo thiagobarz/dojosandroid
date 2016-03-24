@@ -24,10 +24,10 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Valida se os campos foram preenchidos e abre a tela principal.
      *
-     * @param view
+     * @param view View de onde esse método está sendo chamado.
      */
     public void realizarLogin(View view) {
-        if (isCamposPreenchidos()) {
+        if (!isCamposPreenchidos()) {
             Toast.makeText(this, getString(R.string.toastPreenchaUsuarioSenha), Toast.LENGTH_LONG);
         } else {
             Intent intentTelaGeral = new Intent(this, GeralActivity.class);
