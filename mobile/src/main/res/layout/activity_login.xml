@@ -36,6 +36,7 @@
         android:id="@+id/senha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="@string/hintPassword"
         android:inputType="textPassword"
         android:maxLength="25" />
 
@@ -45,8 +46,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
+        android:background="@color/colorAccent"
         android:onClick="realizarLogin"
-        android:text="Logar" />
+        android:text="@string/btnLogar" />
 
 
 

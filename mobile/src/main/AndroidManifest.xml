@@ -18,8 +18,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".GeralActivity"
-            android:label="@string/title_activity_geral"
+            android:name=".PrincipalActivity"
+            android:label="@string/title_activity_principal"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

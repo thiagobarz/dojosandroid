@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         if (!isCamposPreenchidos()) {
             Toast.makeText(this, getString(R.string.toastPreenchaUsuarioSenha), Toast.LENGTH_LONG);
         } else {
-            Intent intentTelaGeral = new Intent(this, GeralActivity.class);
+            Intent intentTelaGeral = new Intent(this, PrincipalActivity.class);
             startActivity(intentTelaGeral);
         }
     }
