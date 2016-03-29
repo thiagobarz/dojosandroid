@@ -1,14 +1,18 @@
 package com.dojos.crud;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class LoginActivity extends AppCompatActivity {
+import com.dojos.crud.service.LoginService;
+import com.dojos.crud.service.LoginServiceResponse;
 
+public class LoginActivity extends AppCompatActivity implements LoginServiceResponse {
+
+    private LoginServiceResponse listener;
     private EditText usuario;
     private EditText senha;
 
@@ -30,8 +34,13 @@ public class LoginActivity extends AppCompatActivity {
         if (!isCamposPreenchidos()) {
             Toast.makeText(this, getString(R.string.toastPreenchaUsuarioSenha), Toast.LENGTH_LONG).show();
         } else {
-            Intent intentTelaGeral = new Intent(this, PrincipalActivity.class);
-            startActivity(intentTelaGeral);
+            LoginService service = new LoginService(this.listener);
+            //service.getToken(usuario.getText().toString(), senha.getText().toString());
+            service.execute(usuario.getText().toString(), senha.getText().toString());
+
+
+            //Intent intentTelaGeral = new Intent(this, PrincipalActivity.class);
+            //startActivity(intentTelaGeral);
         }
     }
 
@@ -42,5 +51,10 @@ public class LoginActivity extends AppCompatActivity {
      */
     private Boolean isCamposPreenchidos() {
         return (!usuario.getText().toString().isEmpty() && !senha.getText().toString().isEmpty());
+    }
+
+    @Override
+    public void onTaskCompleted() {
+        Log.i("lalalalalalalala", "hehehehehehehehhe");
     }
 }
