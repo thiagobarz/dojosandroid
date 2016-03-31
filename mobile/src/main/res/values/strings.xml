@@ -17,4 +17,8 @@
 
     <string name="action_settings">Settings</string>
 
+    <!-- SharePreferences Token-->
+    <string name="TOKEN">token</string>
+
+
 </resources>

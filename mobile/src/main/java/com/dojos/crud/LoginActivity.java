@@ -1,5 +1,8 @@
 package com.dojos.crud;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -7,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.dojos.crud.entidades.RetornoWebService;
 import com.dojos.crud.service.LoginService;
 import com.dojos.crud.service.LoginServiceResponse;
 
@@ -34,13 +38,12 @@ public class LoginActivity extends AppCompatActivity implements LoginServiceResp
         if (!isCamposPreenchidos()) {
             Toast.makeText(this, getString(R.string.toastPreenchaUsuarioSenha), Toast.LENGTH_LONG).show();
         } else {
-            LoginService service = new LoginService(this.listener);
+            LoginService service = new LoginService(this);
             //service.getToken(usuario.getText().toString(), senha.getText().toString());
             service.execute(usuario.getText().toString(), senha.getText().toString());
 
 
-            //Intent intentTelaGeral = new Intent(this, PrincipalActivity.class);
-            //startActivity(intentTelaGeral);
+
         }
     }
 
@@ -54,7 +57,18 @@ public class LoginActivity extends AppCompatActivity implements LoginServiceResp
     }
 
     @Override
-    public void onTaskCompleted() {
-        Log.i("lalalalalalalala", "hehehehehehehehhe");
+    public void onTaskCompleted(RetornoWebService retornoWebService) {
+        Log.i("DojoAndroid", retornoWebService.getMensagemRetorno());
+        if (retornoWebService.isRetornoWs() && retornoWebService.getRetorno() != null) {
+
+            SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString(getString(R.string.TOKEN), (String) retornoWebService.getRetorno());
+            editor.commit();
+
+            Intent intentTelaGeral = new Intent(this, PrincipalActivity.class);
+            startActivity(intentTelaGeral);
+        }
+
     }
 }

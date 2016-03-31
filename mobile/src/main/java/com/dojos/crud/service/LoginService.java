@@ -2,6 +2,8 @@ package com.dojos.crud.service;
 
 import android.os.AsyncTask;
 
+import com.dojos.crud.entidades.RetornoWebService;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -14,7 +16,7 @@ import org.json.JSONObject;
 /**
  * Created by thiagobarz on 24/03/2016.
  */
-public class LoginService extends AsyncTask<String, Integer, String> {
+public class LoginService extends AsyncTask<String, Integer, RetornoWebService> {
 
 
     private LoginServiceResponse listener;
@@ -25,18 +27,21 @@ public class LoginService extends AsyncTask<String, Integer, String> {
 
     // required methods
 
-    protected void onPostExecute(String... params) {
-        // your stuff
-        listener.onTaskCompleted();
-    }
 
     @Override
-    protected String doInBackground(String... params) {
+    protected RetornoWebService doInBackground(String... params) {
+
+        RetornoWebService retornoWebService;
 
         String login = params[0];
         String senha = params[1];
         JSONObject jsonobj = new JSONObject();
         JSONObject jsonResponse;
+        String tokenRetornado;
+
+        tokenRetornado = "";
+        retornoWebService = new RetornoWebService();
+
         try {
             jsonobj.put("usuario", login);
             jsonobj.put("senha", senha);
@@ -49,16 +54,32 @@ public class LoginService extends AsyncTask<String, Integer, String> {
             HttpResponse httpresponse = httpclient.execute(httppostreq);
             String responseText;
             responseText = EntityUtils.toString(httpresponse.getEntity());
+
             if (httpresponse.getStatusLine().getStatusCode() == 200) {
+
+                retornoWebService.setRetornoWs(true);
+
                 jsonResponse = new JSONObject(responseText);
-                return (String) jsonResponse.get("token");
+
+                if (jsonResponse.has("token"))
+                    tokenRetornado = jsonResponse.get("token").toString();
+                else
+                    tokenRetornado = null;
+                retornoWebService.setMensagemRetorno(httpresponse.getStatusLine().getReasonPhrase());
+                retornoWebService.setRetorno(tokenRetornado);
+            } else {
+                retornoWebService.setRetornoWs(false);
+                retornoWebService.setMensagemRetorno(httpresponse.getStatusLine().getReasonPhrase());
+                tokenRetornado = null;
+                retornoWebService.setRetorno(tokenRetornado);
             }
+            listener.onTaskCompleted(retornoWebService);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return null;
+        return retornoWebService;
     }
 
 
