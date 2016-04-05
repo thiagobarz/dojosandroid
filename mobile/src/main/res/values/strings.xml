@@ -19,6 +19,7 @@
 
     <!-- SharePreferences Token-->
     <string name="TOKEN">token</string>
+    <string name="USUARIO">usuario</string>
 
 
 </resources>

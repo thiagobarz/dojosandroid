@@ -64,6 +64,7 @@ public class LoginActivity extends AppCompatActivity implements LoginServiceResp
             SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString(getString(R.string.TOKEN), (String) retornoWebService.getRetorno());
+            editor.putString(getString(R.string.USUARIO), usuario.getText().toString());
             editor.commit();
 
             Intent intentTelaGeral = new Intent(this, PrincipalActivity.class);

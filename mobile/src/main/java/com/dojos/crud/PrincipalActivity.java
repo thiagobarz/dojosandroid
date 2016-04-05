@@ -14,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 public class PrincipalActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -47,9 +46,13 @@ public class PrincipalActivity extends AppCompatActivity
 
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         String tokenRetornado = sharedPref.getString(getResources().getString(R.string.TOKEN), "");
+        String usuario = sharedPref.getString(getResources().getString(R.string.USUARIO), "");
 
-        TextView txtToken = (TextView) findViewById(R.id.txtTokenRetornado);
-        txtToken.setText(tokenRetornado);
+//        TextView txtToken = (TextView) findViewById(R.id.txtTokenRetornado);
+//        txtToken.setText(tokenRetornado);
+//
+//        TextView txtUsuario = (TextView) findViewById(R.id.txtUsuario);
+//        txtUsuario.setText(usuario);
     }
 
     @Override
