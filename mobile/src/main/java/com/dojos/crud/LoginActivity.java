@@ -1,6 +1,5 @@
 package com.dojos.crud;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -61,7 +60,8 @@ public class LoginActivity extends AppCompatActivity implements LoginServiceResp
         Log.i("DojoAndroid", retornoWebService.getMensagemRetorno());
         if (retornoWebService.isRetornoWs() && retornoWebService.getRetorno() != null) {
 
-            SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+            //SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("DojoAndroid", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString(getString(R.string.TOKEN), (String) retornoWebService.getRetorno());
             editor.putString(getString(R.string.USUARIO), usuario.getText().toString());
@@ -69,6 +69,8 @@ public class LoginActivity extends AppCompatActivity implements LoginServiceResp
 
             Intent intentTelaGeral = new Intent(this, PrincipalActivity.class);
             startActivity(intentTelaGeral);
+        } else {
+            Toast.makeText(this, getString(R.string.toastUsuarioSenhaInvalido), Toast.LENGTH_LONG).show();
         }
 
     }

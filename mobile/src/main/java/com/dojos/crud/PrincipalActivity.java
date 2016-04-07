@@ -1,6 +1,5 @@
 package com.dojos.crud;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 public class PrincipalActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -36,7 +36,17 @@ public class PrincipalActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+            //Metodo que escuta a abertura do DrawerView
+            public void onDrawerOpened(View drawerView) {
+                SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("DojoAndroid", MODE_PRIVATE);
+                String usuario = sharedPref.getString(getResources().getString(R.string.USUARIO), "");
+
+                TextView txtUsuario = (TextView) findViewById(R.id.txtUsuario);
+
+                txtUsuario.setText(usuario);
+            }
+        };
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -44,15 +54,12 @@ public class PrincipalActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("DojoAndroid", MODE_PRIVATE);
         String tokenRetornado = sharedPref.getString(getResources().getString(R.string.TOKEN), "");
-        String usuario = sharedPref.getString(getResources().getString(R.string.USUARIO), "");
 
-//        TextView txtToken = (TextView) findViewById(R.id.txtTokenRetornado);
-//        txtToken.setText(tokenRetornado);
-//
-//        TextView txtUsuario = (TextView) findViewById(R.id.txtUsuario);
-//        txtUsuario.setText(usuario);
+        TextView txtToken = (TextView) findViewById(R.id.txtTokenRetornado);
+        txtToken.setText(tokenRetornado);
+
     }
 
     @Override
@@ -93,17 +100,11 @@ public class PrincipalActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_perfil) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_minha_generali) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_sair) {
 
         }
 

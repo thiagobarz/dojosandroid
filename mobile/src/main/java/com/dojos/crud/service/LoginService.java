@@ -26,6 +26,10 @@ public class LoginService extends AsyncTask<String, Integer, RetornoWebService> 
     }
 
     // required methods
+    @Override
+    protected void onPostExecute(RetornoWebService retornoWebService) {
+        listener.onTaskCompleted(retornoWebService);
+    }
 
 
     @Override
@@ -73,7 +77,7 @@ public class LoginService extends AsyncTask<String, Integer, RetornoWebService> 
                 tokenRetornado = null;
                 retornoWebService.setRetorno(tokenRetornado);
             }
-            listener.onTaskCompleted(retornoWebService);
+
 
         } catch (Exception e) {
             e.printStackTrace();

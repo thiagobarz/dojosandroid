@@ -7,9 +7,16 @@
     <string name="btnLogar">Logar</string>
     <string name="title_activity_geral">GeralActivity</string>
 
+    <!-- Menu -->
+    <string name="nav_perfilstring">Perfil</string>
+    <string name="nav_minhageneralistring">Minha Generali</string>
+    <string name="nav_controlesstring">Controles</string>
+    <string name="nav_sairstring">Sair</string>
+
 
     <!-- TOAST -->
     <string name="toastPreenchaUsuarioSenha">Preencha os campos Usuário e Senha.</string>
+    <string name="toastUsuarioSenhaInvalido">Usuário ou/e Senha inválidos.</string>
     <string name="title_activity_principal">PrincipalActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
