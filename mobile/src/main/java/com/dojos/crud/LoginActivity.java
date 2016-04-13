@@ -23,7 +23,9 @@ public class LoginActivity extends AppCompatActivity implements LoginServiceResp
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        if(verifyExistsToken()){
+            abrirJanela();
+        }
         usuario = ((EditText) findViewById(R.id.usuario));
         senha = ((EditText) findViewById(R.id.senha));
     }
@@ -40,9 +42,6 @@ public class LoginActivity extends AppCompatActivity implements LoginServiceResp
             LoginService service = new LoginService(this);
             //service.getToken(usuario.getText().toString(), senha.getText().toString());
             service.execute(usuario.getText().toString(), senha.getText().toString());
-
-
-
         }
     }
 
@@ -58,6 +57,7 @@ public class LoginActivity extends AppCompatActivity implements LoginServiceResp
     @Override
     public void onTaskCompleted(RetornoWebService retornoWebService) {
         Log.i("DojoAndroid", retornoWebService.getMensagemRetorno());
+
         if (retornoWebService.isRetornoWs() && retornoWebService.getRetorno() != null) {
 
             //SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
@@ -67,11 +67,30 @@ public class LoginActivity extends AppCompatActivity implements LoginServiceResp
             editor.putString(getString(R.string.USUARIO), usuario.getText().toString());
             editor.commit();
 
-            Intent intentTelaGeral = new Intent(this, PrincipalActivity.class);
-            startActivity(intentTelaGeral);
+            abrirJanela();
         } else {
             Toast.makeText(this, getString(R.string.toastUsuarioSenhaInvalido), Toast.LENGTH_LONG).show();
         }
 
     }
+
+    private void abrirJanela() {
+        Intent intentTelaGeral = new Intent(this, PrincipalActivity.class);
+        startActivity(intentTelaGeral);
+    }
+
+    private Boolean verifyExistsToken(){
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("DojoAndroid", MODE_PRIVATE);
+        String token = sharedPref.getString(getString(R.string.TOKEN), "");
+        Boolean bVerdade;
+        if(token.isEmpty()) {
+            bVerdade=Boolean.FALSE;
+        }else{
+            bVerdade=Boolean.TRUE;
+        }
+
+        return bVerdade;
+    }
+
+
 }

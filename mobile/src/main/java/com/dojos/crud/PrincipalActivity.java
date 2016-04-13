@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.dojos.crud.service.PropostaService;
+
 public class PrincipalActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -59,6 +61,11 @@ public class PrincipalActivity extends AppCompatActivity
 
         TextView txtToken = (TextView) findViewById(R.id.txtTokenRetornado);
         txtToken.setText(tokenRetornado);
+
+    }
+
+    private void obterPropostas(){
+        PropostaService service = new PropostaService(this);
 
     }
 
