@@ -19,9 +19,9 @@ import org.json.JSONObject;
 public class LoginService extends AsyncTask<String, Integer, RetornoWebService> {
 
 
-    private LoginServiceResponse listener;
+    private ServiceResponse listener;
 
-    public LoginService(LoginServiceResponse listener) {
+    public LoginService(ServiceResponse listener) {
         this.listener = listener;
     }
 

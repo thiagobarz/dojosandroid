@@ -11,11 +11,11 @@ import android.widget.Toast;
 
 import com.dojos.crud.entidades.RetornoWebService;
 import com.dojos.crud.service.LoginService;
-import com.dojos.crud.service.LoginServiceResponse;
+import com.dojos.crud.service.ServiceResponse;
 
-public class LoginActivity extends AppCompatActivity implements LoginServiceResponse {
+public class Activity extends AppCompatActivity implements ServiceResponse {
 
-    private LoginServiceResponse listener;
+    private ServiceResponse listener;
     private EditText usuario;
     private EditText senha;
 

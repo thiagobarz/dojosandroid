@@ -31,8 +31,9 @@ public class PrincipalActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Atualizando", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                obterPropostas();
             }
         });
 
@@ -65,7 +66,11 @@ public class PrincipalActivity extends AppCompatActivity
     }
 
     private void obterPropostas(){
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("DojoAndroid", MODE_PRIVATE);
+        String tokenRetornado = sharedPref.getString(getResources().getString(R.string.TOKEN), "");
+
         PropostaService service = new PropostaService(this);
+        service.execute(tokenRetornado);
 
     }
 
